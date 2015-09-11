@@ -1,6 +1,6 @@
 Plack-Middleware-Dispatch
 
-Plack::Middleware::Dispatch aims to provide request handling for general purposes
+Plack::Middleware::Dispatch aims to provide a possibility for list based request handling
 
 INSTALLATION
 

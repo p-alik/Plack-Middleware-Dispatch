@@ -1,5 +1,4 @@
-Plack::Middleware::Dispatch aims to provide simple list based request handling
-
+Plack::Middleware::Dispatch aims to provide a possibility for list based request handling
 
 ```perl
 
