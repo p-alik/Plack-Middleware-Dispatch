@@ -113,6 +113,10 @@ Please report any bugs or feature requests to C<bug-plack-middleware-dispatch1 a
 the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Plack-Middleware-Dispatch>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
+=head1 REPOSITORY
+
+L<https://github.com/p-alik/Plack-Middleware-Dispatch>
+
 =head1 SUPPORT
 
 You can find documentation for this module with the perldoc command.
