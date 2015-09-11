@@ -14,7 +14,6 @@ builder {
   $app;
 };
 
-# cb(Plack::Request)
 sub cb {
   my($env) = @_;
     ...

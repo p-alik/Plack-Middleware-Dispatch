@@ -11,8 +11,9 @@ sub new {
 }
 
 sub dispatch {
-    my ($self, $req) = @_;
-    isa_ok($req, "Plack::Request", ref($self) . "->dispatch");
+    my ($self, $env) = @_;
+    isa_ok($env, "HASH", ref($self) . "->dispatch");
+    return $env;
 }
 1;
 
@@ -24,10 +25,10 @@ use Plack::Test;
 use Test::More;
 use Test::Exception;
 
-my $cln = "Plack::Middleware::Dispatch";
+my $cln = "Plack::Middleware::Dispatch::GP";
 use_ok($cln);
 
-diag("Testing $cln $Plack::Middleware::Dispatch::VERSION, Perl $], $^X");
+diag("Testing $cln $Plack::Middleware::Dispatch::GP::VERSION, Perl $], $^X");
 
 my $app = sub { return [200, ["Content-Type" => "text/plain"], ["OK"]] };
 
@@ -49,8 +50,9 @@ subtest "catch exceptions", sub {
 };
 
 my %post = (foo => 'bar');
+my $d = XXX->new();
 test_psgi app => builder {
-    enable "Dispatch", dispatch => [XXX->new(), \&cb];
+    enable "Dispatch::GP", dispatch => [$d, \&cb];
     $app;
 },
     client => sub {
@@ -62,13 +64,6 @@ test_psgi app => builder {
 done_testing();
 
 sub cb {
-    my ($req) = @_;
-    isa_ok($req, "Plack::Request", "cb");
-    is($req->method, "POST", "POST request");
-    isa_ok($req->parameters, "Hash::MultiValue");
-    my %h = Hash::MultiValue->from_mixed($req->parameters)->flatten;
-    foreach (keys %h) {
-        is $h{$_}, $post{$_}, "post{$_}";
-    }
+   $d->dispatch(@_);
 } ## end sub cb
 

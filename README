@@ -1,6 +1,8 @@
-Plack-Middleware-Dispatch
+Plack-Middleware-Dispatch-GP
 
-Plack::Middleware::Dispatch aims to provide a possibility for list based request handling
+Plack::Middleware::Dispatch::GP - general purpose dispatcher aims to provide a possibility list based env handling
+
+Plack::Middleware::Dispatch::GP::Request - derived module aims to provide a possibility list based request handling
 
 INSTALLATION
 
@@ -16,22 +18,7 @@ SUPPORT AND DOCUMENTATION
 After installing, you can find documentation for this module with the
 perldoc command.
 
-    perldoc Plack::Middleware::Dispatch
-
-You can also look for information at:
-
-    RT, CPAN's request tracker (report bugs here)
-        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Plack-Middleware-Dispatch
-
-    AnnoCPAN, Annotated CPAN documentation
-        http://annocpan.org/dist/Plack-Middleware-Dispatch
-
-    CPAN Ratings
-        http://cpanratings.perl.org/d/Plack-Middleware-Dispatch
-
-    Search CPAN
-        http://search.cpan.org/dist/Plack-Middleware-Dispatch/
-
+    perldoc Plack::Middleware::Dispatch::GP
 
 LICENSE AND COPYRIGHT
 

@@ -4,10 +4,10 @@ use warnings FATAL => 'all';
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-    NAME               => 'Plack::Middleware::Dispatch',
+    NAME               => 'Plack::Middleware::Dispatch::GP',
     AUTHOR             => q{Alexei Pastuchov <palik@cpan.org>},
-    VERSION_FROM       => 'lib/Plack/Middleware/Dispatch.pm',
-    ABSTRACT_FROM      => 'lib/Plack/Middleware/Dispatch.pm',
+    VERSION_FROM       => 'lib/Plack/Middleware/Dispatch/GP.pm',
+    ABSTRACT_FROM      => 'lib/Plack/Middleware/Dispatch/GP.pm',
     LICENSE            => 'Artistic_2_0',
     MIN_PERL_VERSION   => 5.006,
     CONFIGURE_REQUIRES => { "ExtUtils::MakeMaker" => 0, },

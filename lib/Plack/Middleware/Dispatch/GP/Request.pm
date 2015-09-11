@@ -1,9 +1,13 @@
-package Plack::Middleware::Dispatch;
-$Plack::Middleware::Dispatch::VERSION = '0.01';
+package Plack::Middleware::Dispatch::GP::Request;
+$Plack::Middleware::Dispatch::GP::Request::VERSION = '0.01';
 
 =head1 NAME
 
-Plack::Middleware::Dispatch - Simple general purposes dispatcher middleware
+Plack::Middleware::Dispatch::GP::Request - dispatcher middleware for general purposes request handling
+
+=head1 DESCRIPTION
+
+The module is derived from C<Plack::Middleware::Dispatch::GP>. It provides Plack::Request to registered dispatchers
 
 =head1 VERSION
 
@@ -14,7 +18,7 @@ Version 0.01
 use strict;
 use warnings FATAL => 'all';
 
-use parent "Plack::Middleware";
+use parent "Plack::Middleware::Dispatch::GP";
 use Plack::Util::Accessor qw/
     dispatch
     /;
@@ -45,44 +49,14 @@ use Scalar::Util   ();
 
 =head2 new($p)
 
-C<$p> a hash reference
-
-C<$p->{dispatch} [CODE reference or an object provides dispatch method]
+see L<Plack::Middleware::Dispatch::GP>
 
 =cut
 
 sub new {
     my $proto = shift;
     my $class = ref($proto) || $proto;
-    (@_ == 1 && ref $_[0] eq "HASH")
-        || die "$class->new expects a has reference parameter";
-
-    my $disp = delete($_[0]->{dispatch});
-    ($disp) || die "$class requires dispatch parameter";
-
-    my $self = $class->SUPER::new(@_);
-    my @d
-        = ref($disp) eq 'ARRAY'
-        ? @{$disp}
-        : ($disp);
-    for (my $i = 0; $i <= $#d; $i++) {
-        if (Scalar::Util::blessed($d[$i])) {
-            my $cb = $d[$i];
-
-            $cb->can("dispatch")
-                || die ref($cb) . " doesn't provide dispatch()";
-
-            $d[$i] = sub { $cb->dispatch(@_) };
-        } ## end if (Scalar::Util::blessed...)
-
-        (ref($d[$i]) eq "CODE") || die <<'HERE';
-dispatch should be a code reference or an object that responds to dispatch()
-HERE
-    } ## end for (my $i = 0; $i <= $#d...)
-
-    $self->dispatch([@d]);
-
-    return $self;
+    return $class->SUPER::new(@_);
 } ## end sub new
 
 =head2 call($env)
@@ -94,57 +68,29 @@ delivers Plack::Request->new($env) to the dispatchers
 sub call {
     my ($self, $env) = @_;
     my $req = Plack::Request->new($env);
-    foreach my $d (@{ $self->dispatch }) {
-        $d->($req);
-    }
+    $self->_dispatch($req);
+    # foreach my $d (@{ $self->dispatch }) {
+    #     $d->($req);
+    # }
 
     $self->app->($env);
 } ## end sub call
 
-1;    # End of Plack::Middleware::Dispatch
+1;    # End of Plack::Middleware::Dispatch::GP::Request
 
 =head1 AUTHOR
 
 Alexei Pastuchov, C<< <palik at cpan.org> >>
 
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-plack-middleware-dispatch1 at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Plack-Middleware-Dispatch>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
-
 =head1 REPOSITORY
 
-L<https://github.com/p-alik/Plack-Middleware-Dispatch>
+L<https://github.com/p-alik/Plack-Middleware-Dispatch-GP>
 
 =head1 SUPPORT
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc Plack::Middleware::Dispatch
-
-You can also look for information at:
-
-=over 4
-
-=item * RT: CPAN's request tracker (report bugs here)
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Plack-Middleware-Dispatch>
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/Plack-Middleware-Dispatch>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/Plack-Middleware-Dispatch>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/Plack-Middleware-Dispatch/>
-
-=back
-
+    perldoc Plack::Middleware::Dispatch::GP::Request
 
 =head1 LICENSE AND COPYRIGHT
 
