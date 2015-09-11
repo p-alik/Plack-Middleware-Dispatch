@@ -1,6 +1,6 @@
 The repository contains two PSGI middleware packages.
 
-- <b>Plack::Middleware::Dispatch::GP</b> - general purpose dispatcher aims to provide a possibility list based env handling
+- _Plack::Middleware::Dispatch::GP_ - general purpose dispatcher aims to provide a possibility list based env handling
 
 ```perl
 
@@ -21,7 +21,7 @@ sub cb {
 
 ```
 
-<b>Plack::Middleware::Dispatch::GP::Request</b> - derived module aims to provide a possibility list based request handling
+- _Plack::Middleware::Dispatch::GP::Request_ - derived module aims to provide a possibility list based request handling
 
 ```perl
 
