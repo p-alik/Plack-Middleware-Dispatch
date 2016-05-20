@@ -1,4 +1,12 @@
-The repository contains two PSGI middleware packages.
+Plack::Middleware::Dispatch::GP
+==============================
+
+The repository contains two [PSGI](http://plackperl.org/) middleware packages.
+
+
+[![CPAN version](https://badge.fury.io/pl/Plack-Middleware-Dispatch-GP.png)](https://badge.fury.io/pl/Plack-Middleware-Dispatch-GP)
+[![Build Status](https://travis-ci.org/p-alik/Plack-Middleware-Dispatch-GP.png)](https://travis-ci.org/p-alik/Plack-Middleware-Dispatch-GP)
+[![Coverage Status](https://coveralls.io/repos/github/p-alik/Plack-Middleware-Dispatch-GP/badge.png)](https://coveralls.io/github/p-alik/Plack-Middleware-Dispatch-GP)
 
 - _Plack::Middleware::Dispatch::GP_ - general purpose dispatcher aims to provide a possibility list based env handling
 
@@ -40,5 +48,3 @@ sub cb {
 }
 
 ```
-
-see http://plackperl.org/
